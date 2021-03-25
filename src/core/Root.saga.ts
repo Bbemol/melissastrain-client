@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 
-import { watchArrivals } from "./features/arrivals/Arrivals.watcher";
+import { watchSNCF } from "./features/sncf/SNCF.watcher";
 
 export function* rootSaga() {
-    yield all([watchArrivals()]);
+    yield all([watchSNCF()]);
 }

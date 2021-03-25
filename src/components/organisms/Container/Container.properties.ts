@@ -4,4 +4,5 @@ export interface ContainerProperties {
     background?: string;
     direction?: ContainerDirection;
     paddingVertical?: number;
+    paddingHorizontal?: number;
 }

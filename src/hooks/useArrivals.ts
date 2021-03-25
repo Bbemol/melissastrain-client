@@ -1,4 +1,4 @@
-import { arrivalsSlice } from "core/features/arrivals/slice/Arrivals.slice";
+import { arrivalsSlice } from "core/features/sncf/slice/arrivals/Arrivals.slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -10,4 +10,6 @@ export const useArrivals = () => {
     useEffect(() => {
         dispatch(fetchArrivals());
     }, [dispatch, fetchArrivals]);
+
+    return;
 };
