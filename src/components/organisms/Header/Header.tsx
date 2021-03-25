@@ -33,7 +33,7 @@ export const Header = () => {
                 >
                     Departures
                 </Button>
-                <Tooltip content="Learn more about a feature">
+                <Tooltip content="Click here to refresh arrivals">
                     <Button appearance="primary" onClick={handleRefresh}>
                         Refresh
                     </Button>
