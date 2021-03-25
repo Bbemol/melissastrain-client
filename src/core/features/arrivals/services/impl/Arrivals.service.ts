@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosPromise } from "axios";
-import { ISNCFService } from "../IArrivals.service";
+import { ISNCFService } from "core/features/arrivals/services/IArrivals.service";
 import { Station } from "core/api/models/Station";
 
 export class SNCFService implements ISNCFService {

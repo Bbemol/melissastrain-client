@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, Pane, Heading, TrainIcon } from "evergreen-ui";
 import { useHistory } from "react-router-dom";
-import { Container } from "../Container/Container";
-import { ContainerDirection } from "../Container/ContainerDirection";
+import { Container, ContainerDirection } from "components";
 
 export const Header = () => {
     let history = useHistory();

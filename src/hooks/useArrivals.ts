@@ -1,4 +1,4 @@
-import { arrivalsSlice } from "../core/features/arrivals/slice/Arrivals.slice";
+import { arrivalsSlice } from "core/features/arrivals/slice/Arrivals.slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 

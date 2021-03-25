@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Station } from "../../../api/models/Station";
+import { Station } from "core/api/models/Station";
 
 import { initialState } from "./InitialState";
 
