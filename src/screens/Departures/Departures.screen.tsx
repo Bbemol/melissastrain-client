@@ -2,7 +2,6 @@ import React from "react";
 import { Pane, Heading, Text } from "evergreen-ui";
 
 import { Networks } from "screens/shared";
-import { Arrivals } from "./Arrivals";
 
 export const DeparturesScreen = () => {
     return (
