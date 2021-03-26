@@ -3,6 +3,7 @@ import { Spinner, Pane, Table, Alert } from "evergreen-ui";
 import { shallowEqual, useSelector } from "react-redux";
 
 import { selectArrivals } from "core/features/sncf/selectors/selectArrivals";
+import { Date } from "utils/Date";
 
 export const Arrivals = () => {
     const { isLoading, data } = useSelector(selectArrivals, shallowEqual);
@@ -22,7 +23,6 @@ export const Arrivals = () => {
             ) : (
                 <Table>
                     <Table.Head>
-                        <Table.TextHeaderCell>headsign</Table.TextHeaderCell>
                         <Table.TextHeaderCell>name</Table.TextHeaderCell>
                         <Table.TextHeaderCell>direction</Table.TextHeaderCell>
                         <Table.TextHeaderCell>network</Table.TextHeaderCell>
@@ -31,11 +31,12 @@ export const Arrivals = () => {
                     <Table.Body>
                         {data?.map((arrival, index) => (
                             <Table.Row key={index}>
-                                <Table.TextCell>{arrival.display_informations.headsign}</Table.TextCell>
                                 <Table.TextCell>{arrival.display_informations.name}</Table.TextCell>
                                 <Table.TextCell>{arrival.display_informations.direction}</Table.TextCell>
                                 <Table.TextCell>{arrival.display_informations.network}</Table.TextCell>
-                                <Table.TextCell>{arrival.stop_date_time.arrival_date_time}</Table.TextCell>
+                                <Table.TextCell>
+                                    {Date.getHour(arrival.stop_date_time.arrival_date_time)}
+                                </Table.TextCell>
                             </Table.Row>
                         ))}
                     </Table.Body>
