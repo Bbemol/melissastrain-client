@@ -1,44 +1,51 @@
 import React from "react";
-import { Button, Pane, Heading, TrainIcon, Tooltip } from "evergreen-ui";
-import { useHistory, useLocation } from "react-router-dom";
-import { Container, ContainerDirection } from "components";
-import { useDispatch } from "react-redux";
+import { Heading, Box, Grid, Tooltip, Button } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { arrivalsSlice } from "core/features/sncf/slice/arrivals/Arrivals.slice";
+import { selectArrivals } from "core/features/sncf/selectors/selectArrivals";
 
 export const Header = () => {
     let history = useHistory();
     const dispatch = useDispatch();
+    const { isLoading } = useSelector(selectArrivals);
     const { fetchArrivals } = arrivalsSlice.actions;
-    let location = useLocation();
-    console.log("location", location.pathname);
     const handleRefresh = () => {
         dispatch(fetchArrivals());
     };
     return (
-        <Container background="tint2" direction={ContainerDirection.Horizontal}>
-            <Pane flex={1} alignItems="center" display="flex">
-                <TrainIcon color="info" size={20} />
-                <Heading size={600} marginLeft={8}>
-                    Melissastrain
-                </Heading>
-            </Pane>
-            <Pane>
-                <Button marginRight={16} onClick={() => history.push("/")} disabled={location.pathname === "/"}>
-                    Arrivals
-                </Button>
-                <Button
-                    marginRight={16}
-                    disabled={location.pathname === "/departures"}
-                    onClick={() => history.push("/departures")}
-                >
-                    Departures
-                </Button>
-                <Tooltip content="Click here to refresh arrivals">
-                    <Button appearance="primary" onClick={handleRefresh}>
-                        Refresh
+        <Box backgroundColor="gray.50" borderBottom="4px" borderColor="gray.300">
+            <Box maxWidth={1000} marginX="auto" d="flex" justifyContent="space-between" alignItems="center" py={5}>
+                <Link to="/">
+                    <Box d="flex" alignItems="center" marginRight={4}>
+                        <Heading color="gray.600" as="h2" size="lg">
+                            Melissastrain
+                        </Heading>
+                    </Box>
+                </Link>
+                <Grid templateColumns="repeat(3, 1fr)" columnGap={4}>
+                    <Button colorScheme="gray" onClick={() => history.push("/")} variant="ghost">
+                        Arrivals
                     </Button>
-                </Tooltip>
-            </Pane>
-        </Container>
+                    <Button colorScheme="gray" onClick={() => history.push("/departures")} variant="ghost">
+                        Departures
+                    </Button>
+                    <Tooltip label="Click here to refresh arrivals" aria-label="Refresh arrivals tooltip">
+                        <Button
+                            colorScheme="red"
+                            onClick={handleRefresh}
+                            isLoading={isLoading}
+                            loadingText="Loading"
+                            variant="outline"
+                        >
+                            Refresh
+                        </Button>
+                    </Tooltip>
+                </Grid>
+            </Box>
+        </Box>
     );
 };

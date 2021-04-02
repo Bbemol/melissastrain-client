@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Pane, Table, Alert } from "evergreen-ui";
+import { Alert, AlertIcon, Flex, Table, Thead, Tbody, Tfoot, Tr, Th, Td, Tag } from "@chakra-ui/react";
 import { shallowEqual, useSelector } from "react-redux";
 
 import { selectArrivals } from "core/features/sncf/selectors/selectArrivals";
@@ -10,36 +10,44 @@ export const Arrivals = () => {
     return (
         <>
             {isLoading ? (
-                <Pane display="flex" justifyContent="center" flexDirection="column" flexGrow={1} alignItems="center">
-                    <Spinner size={24} />
-                    <Alert
-                        appearance="card"
-                        marginTop={16}
-                        intent="none"
-                        title="Be patient, this might be a cold start"
-                        marginBottom={32}
-                    />
-                </Pane>
+                <Flex justify="center">
+                    <Alert status="warning" maxWidth="400">
+                        <AlertIcon />
+                        Be patient, this might be a cold start
+                    </Alert>
+                </Flex>
             ) : (
-                <Table>
-                    <Table.Head>
-                        <Table.TextHeaderCell>name</Table.TextHeaderCell>
-                        <Table.TextHeaderCell>direction</Table.TextHeaderCell>
-                        <Table.TextHeaderCell>network</Table.TextHeaderCell>
-                        <Table.TextHeaderCell>arrival_date_time</Table.TextHeaderCell>
-                    </Table.Head>
-                    <Table.Body>
+                <Table variant="simple " size="sm">
+                    <Thead>
+                        <Tr>
+                            <Th>headsign</Th>
+                            <Th>name</Th>
+                            <Th>direction</Th>
+                            <Th>network</Th>
+                            <Th>arrival_date_time</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
                         {data?.map((arrival, index) => (
-                            <Table.Row key={index}>
-                                <Table.TextCell>{arrival.display_informations.name}</Table.TextCell>
-                                <Table.TextCell>{arrival.display_informations.direction}</Table.TextCell>
-                                <Table.TextCell>{arrival.display_informations.network}</Table.TextCell>
-                                <Table.TextCell>
-                                    {Date.getHour(arrival.stop_date_time.arrival_date_time)}
-                                </Table.TextCell>
-                            </Table.Row>
+                            <Tr key={index}>
+                                <Td>{arrival.display_informations.headsign}</Td>
+                                <Td>{arrival.display_informations.name.substring(0, 12)}</Td>
+                                <Td>{arrival.display_informations.direction}</Td>
+                                <Td>
+                                    <Tag colorScheme="gray">{arrival.display_informations.network}</Tag>
+                                </Td>
+                                <Td>{Date.getHour(arrival.stop_date_time.arrival_date_time)}</Td>
+                            </Tr>
                         ))}
-                    </Table.Body>
+                    </Tbody>
+                    <Tfoot>
+                        <Tr>
+                            <Th>name</Th>
+                            <Th>direction</Th>
+                            <Th>network</Th>
+                            <Th>arrival_date_time</Th>
+                        </Tr>
+                    </Tfoot>
                 </Table>
             )}
         </>
