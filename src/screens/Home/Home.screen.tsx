@@ -29,7 +29,7 @@ export const HomeScreen = () => {
                     <Flex justify="center" align="center" marginBottom="6" maxWidth="600">
                         <InputGroup>
                             <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.300" />} />
-                            <Input type="text" placeholder="Phone number" />
+                            <Input type="text" placeholder="Search for ..." />
                         </InputGroup>
                         <FormControl display="flex" alignItems="start" marginLeft="4">
                             <FormLabel htmlFor="email-alerts" mb="0">
