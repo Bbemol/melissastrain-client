@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Text, Pane, Table, Alert, Heading, Checkbox } from "evergreen-ui";
+import { Spinner, Box, Alert, AlertIcon, Checkbox, Heading } from "@chakra-ui/react";
 
 import { shallowEqual, useSelector } from "react-redux";
 import { selectNetworks } from "core/features/sncf/selectors/selectNetworks";
@@ -7,19 +7,19 @@ import { selectNetworks } from "core/features/sncf/selectors/selectNetworks";
 export const Networks = () => {
     const { isLoading, data } = useSelector(selectNetworks, shallowEqual);
     return (
-        <Pane>
-            {isLoading ? (
-                <Pane display="flex" justifyContent="center" flexDirection="column" alignItems="center">
-                    <Spinner size={24} />
-                </Pane>
-            ) : (
+        <Box width={200}>
+            {!isLoading && (
                 <>
-                    <Heading>Networks</Heading>
+                    <Heading as="h3" size="sm" marginBottom="4">
+                        Networks
+                    </Heading>
                     {data?.map((network, index) => (
-                        <Checkbox key={index} checked label={network.name} />
+                        <Checkbox d="flex" key={index}>
+                            {network.name}
+                        </Checkbox>
                     ))}
                 </>
             )}
-        </Pane>
+        </Box>
     );
 };

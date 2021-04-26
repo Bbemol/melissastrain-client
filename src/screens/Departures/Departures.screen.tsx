@@ -1,26 +1,26 @@
 import React from "react";
-import { Pane, Heading, Text } from "evergreen-ui";
+import { Heading, Box, Text } from "@chakra-ui/react";
 
 import { Networks } from "screens/shared";
 
 export const DeparturesScreen = () => {
     return (
-        <>
-            <Heading size={600} marginBottom={24}>
-                /Departures
-            </Heading>
-            <Pane display="flex" alignItems="flex-start">
-                <Pane width={200} flexShrink={0} padding={16} elevation={1}>
+        <Box d="flex" flexDir="column">
+            <Box d="flex">
+                <Box>
+                    <Heading as="h1" size="md" marginBottom="8">
+                        /Departures
+                    </Heading>
                     <Networks />
-                </Pane>
-                <Pane display="flex" flexGrow={1} marginLeft={32} borderColor="tint2">
+                </Box>
+                <Box d="flex">
                     <Text>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam delectus ex laudantium similique.
                         Temporibus deleniti cum, voluptatibus officiis eaque expedita iste numquam doloribus ratione
                         dolorum quaerat et vel alias harum.
                     </Text>
-                </Pane>
-            </Pane>
-        </>
+                </Box>
+            </Box>
+        </Box>
     );
 };

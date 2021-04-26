@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Pane } from "evergreen-ui";
+import { Box } from "@chakra-ui/react";
 import { ContainerProperties } from "./Container.properties";
 import { ContainerDirection } from "./ContainerDirection";
 
@@ -7,29 +7,18 @@ export const Container: FC<ContainerProperties> = ({
     background = "white",
     direction = ContainerDirection.Vertical,
     paddingVertical = 8,
-    paddingHorizontal = 8,
     children
 }) => {
     return (
-        <Pane
-            display="flex"
-            background={background}
-            justifyContent="center"
-            paddingTop={paddingVertical}
-            paddingBottom={paddingVertical}
+        <Box
+            d="flex"
+            flexDir={direction}
+            maxW={1000}
+            marginX="auto"
+            paddingY={paddingVertical}
+            backgroundColor={background}
         >
-            <Pane
-                flex={1}
-                display="flex"
-                flexDirection={direction}
-                paddingTop={paddingVertical}
-                paddingBottom={paddingVertical}
-                paddingLeft={paddingHorizontal}
-                paddingRight={paddingHorizontal}
-                maxWidth={1000}
-            >
-                {children}
-            </Pane>
-        </Pane>
+            <Box d="flex">{children}</Box>
+        </Box>
     );
 };
