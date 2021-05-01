@@ -1,6 +1,5 @@
-import { AxiosInstance, AxiosPromise, AxiosResponse } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 import { ISNCFService } from "core/api/services/ISNCF.service";
-import { Station } from "core/api/models/Station";
 import { Network } from "core/api/models/Network";
 import { Arrival } from "core/api/models/Arrival";
 
