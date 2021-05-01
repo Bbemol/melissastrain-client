@@ -1,15 +1,16 @@
-import { AxiosInstance, AxiosPromise } from "axios";
+import { AxiosInstance, AxiosPromise, AxiosResponse } from "axios";
 import { ISNCFService } from "core/api/services/ISNCF.service";
 import { Station } from "core/api/models/Station";
 import { Network } from "core/api/models/Network";
+import { Arrival } from "core/api/models/Arrival";
 
 export class SNCFService implements ISNCFService {
     constructor(private api: AxiosInstance) {}
 
-    getArrivals = (): AxiosPromise<Array<Station>> => {
-        return this.api.get("/");
+    getArrivals = async (stationId: string): Promise<AxiosResponse<Array<Arrival>>> => {
+        return await this.api.get(`/station/${stationId}/arrivals`);
     };
-    getNetworks = (): AxiosPromise<Array<Network>> => {
-        return this.api.get("/linetypes");
+    getNetworks = async (): Promise<AxiosResponse<Array<Network>>> => {
+        return await this.api.get("/legacy/networks");
     };
 }

@@ -1,15 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { networksSlice } from "core/features/sncf/slice/networks/Networks.slice";
+import { useQuery } from "react-query";
+import { sncfService } from "core/api/services";
 
 export const useNetworks = () => {
-    const dispatch = useDispatch();
-
-    const { fetchNetworks } = networksSlice.actions;
-
-    useEffect(() => {
-        dispatch(fetchNetworks());
-    }, [dispatch, fetchNetworks]);
-
-    return;
+    const { data, ...query } = useQuery("networks", sncfService.getNetworks);
+    return { ...data, ...query };
 };

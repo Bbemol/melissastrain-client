@@ -1,15 +1,7 @@
-import { arrivalsSlice } from "core/features/sncf/slice/arrivals/Arrivals.slice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useQuery } from "react-query";
+import { sncfService } from "core/api/services";
 
-export const useArrivals = () => {
-    const dispatch = useDispatch();
-
-    const { fetchArrivals } = arrivalsSlice.actions;
-
-    useEffect(() => {
-        dispatch(fetchArrivals());
-    }, [dispatch, fetchArrivals]);
-
-    return;
+export const useArrivals = (stationId: string) => {
+    const { data, ...query } = useQuery(["arrivals", stationId], () => sncfService.getArrivals(stationId));
+    return { ...data, ...query };
 };

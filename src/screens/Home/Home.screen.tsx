@@ -13,7 +13,7 @@ import {
 
 import { Networks } from "screens/shared";
 import { Arrivals } from "./Arrivals";
-import { PhoneIcon, Search2Icon } from "@chakra-ui/icons";
+import { Search2Icon } from "@chakra-ui/icons";
 
 export const HomeScreen = () => {
     return (

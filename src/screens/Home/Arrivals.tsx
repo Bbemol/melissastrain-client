@@ -1,12 +1,10 @@
 import React from "react";
 import { Alert, AlertIcon, Flex, Table, Thead, Tbody, Tfoot, Tr, Th, Td, Tag } from "@chakra-ui/react";
-import { shallowEqual, useSelector } from "react-redux";
-
-import { selectArrivals } from "core/features/sncf/selectors/selectArrivals";
 import { Date } from "utils/Date";
+import { useArrivals } from "hooks";
 
 export const Arrivals = () => {
-    const { isLoading, data } = useSelector(selectArrivals, shallowEqual);
+    const { isLoading, data } = useArrivals("stop_area:SNCF:87384008");
     return (
         <>
             {isLoading ? (
@@ -42,6 +40,7 @@ export const Arrivals = () => {
                     </Tbody>
                     <Tfoot>
                         <Tr>
+                            <Th>headsign</Th>
                             <Th>name</Th>
                             <Th>direction</Th>
                             <Th>network</Th>

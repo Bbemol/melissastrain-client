@@ -4,17 +4,14 @@ import { Heading, Box, Grid, Tooltip, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { arrivalsSlice } from "core/features/sncf/slice/arrivals/Arrivals.slice";
-import { selectArrivals } from "core/features/sncf/selectors/selectArrivals";
+import { useIsFetching, useQueryClient } from "react-query";
 
 export const Header = () => {
+    const isFetching = useIsFetching() > 0;
+    const queryClient = useQueryClient();
     let history = useHistory();
-    const dispatch = useDispatch();
-    const { isLoading } = useSelector(selectArrivals);
-    const { fetchArrivals } = arrivalsSlice.actions;
     const handleRefresh = () => {
-        dispatch(fetchArrivals());
+        return queryClient.refetchQueries();
     };
     return (
         <Box backgroundColor="gray.50" borderBottom="4px" borderColor="gray.300">
@@ -37,7 +34,7 @@ export const Header = () => {
                         <Button
                             colorScheme="red"
                             onClick={handleRefresh}
-                            isLoading={isLoading}
+                            isLoading={isFetching}
                             loadingText="Loading"
                             variant="outline"
                         >

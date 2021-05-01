@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
-import { store } from "core/Store";
 import "core/styles/index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
             <ChakraProvider>
                 <App />
             </ChakraProvider>
-        </Provider>
+        </QueryClientProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

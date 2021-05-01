@@ -1,14 +1,13 @@
 import React from "react";
-import { Spinner, Box, Alert, AlertIcon, Checkbox, Heading } from "@chakra-ui/react";
+import { Box, Checkbox, Heading } from "@chakra-ui/react";
 
-import { shallowEqual, useSelector } from "react-redux";
-import { selectNetworks } from "core/features/sncf/selectors/selectNetworks";
+import { useNetworks } from "hooks";
 
 export const Networks = () => {
-    const { isLoading, data } = useSelector(selectNetworks, shallowEqual);
+    const { data, isSuccess } = useNetworks();
     return (
         <Box width={200}>
-            {!isLoading && (
+            {isSuccess && (
                 <>
                     <Heading as="h3" size="sm" marginBottom="4">
                         Networks
