@@ -9,7 +9,7 @@ export class SNCFService implements ISNCFService {
     getArrivals = async (stationId: string): Promise<AxiosResponse<Array<Arrival>>> => {
         return await this.api.get(`/station/${stationId}/arrivals`);
     };
-    getNetworks = async (): Promise<AxiosResponse<Array<Network>>> => {
-        return await this.api.get("/legacy/networks");
+    getNetworks = async (stationId: string): Promise<AxiosResponse<Array<Network>>> => {
+        return await this.api.get(`/station/${stationId}/networks`);
     };
 }

@@ -4,15 +4,22 @@ import { Date } from "utils/Date";
 import { useArrivals } from "hooks";
 
 export const Arrivals = () => {
-    const { isLoading, data } = useArrivals("stop_area:SNCF:87384008");
+    const { isSuccess, isError, data, error } = useArrivals("stop_area:SNCF:87384008");
     return (
         <>
-            {isLoading ? (
+            {!isSuccess ? (
                 <Flex justify="center">
-                    <Alert status="warning" maxWidth="400">
-                        <AlertIcon />
-                        Be patient, this might be a cold start
-                    </Alert>
+                    {isError ? (
+                        <Alert status="error" maxWidth="400">
+                            <AlertIcon />
+                            {error?.toString()}
+                        </Alert>
+                    ) : (
+                        <Alert status="warning" maxWidth="400">
+                            <AlertIcon />
+                            Arrivals loading
+                        </Alert>
+                    )}
                 </Flex>
             ) : (
                 <Table variant="simple " size="sm">
@@ -26,17 +33,18 @@ export const Arrivals = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {data?.map((arrival, index) => (
-                            <Tr key={index}>
-                                <Td>{arrival.display_informations.headsign}</Td>
-                                <Td>{arrival.display_informations.name.substring(0, 12)}</Td>
-                                <Td>{arrival.display_informations.direction}</Td>
-                                <Td>
-                                    <Tag colorScheme="gray">{arrival.display_informations.network}</Tag>
-                                </Td>
-                                <Td>{Date.getHour(arrival.stop_date_time.arrival_date_time)}</Td>
-                            </Tr>
-                        ))}
+                        {data?.length &&
+                            data?.map((arrival, index) => (
+                                <Tr key={index}>
+                                    <Td>{arrival.display_informations.headsign}</Td>
+                                    <Td>{arrival.display_informations.name.substring(0, 12)}</Td>
+                                    <Td>{arrival.display_informations.direction}</Td>
+                                    <Td>
+                                        <Tag colorScheme="gray">{arrival.display_informations.network}</Tag>
+                                    </Td>
+                                    <Td>{Date.getHour(arrival.stop_date_time.arrival_date_time)}</Td>
+                                </Tr>
+                            ))}
                     </Tbody>
                     <Tfoot>
                         <Tr>

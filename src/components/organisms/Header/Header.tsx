@@ -19,7 +19,7 @@ export const Header = () => {
                 <Link to="/">
                     <Box d="flex" alignItems="center" marginRight={4}>
                         <Heading color="gray.600" as="h2" size="lg">
-                            Melissastrain
+                            Melissa
                         </Heading>
                     </Box>
                 </Link>
@@ -31,13 +31,7 @@ export const Header = () => {
                         Departures
                     </Button>
                     <Tooltip label="Click here to refresh arrivals" aria-label="Refresh arrivals tooltip">
-                        <Button
-                            colorScheme="red"
-                            onClick={handleRefresh}
-                            isLoading={isFetching}
-                            loadingText="Loading"
-                            variant="outline"
-                        >
+                        <Button colorScheme="red" onClick={handleRefresh} isLoading={isFetching} variant="outline">
                             Refresh
                         </Button>
                     </Tooltip>

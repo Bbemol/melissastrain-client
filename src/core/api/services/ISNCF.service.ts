@@ -4,5 +4,5 @@ import { Arrival } from "../models/Arrival";
 
 export interface ISNCFService {
     getArrivals(stationId: string): Promise<AxiosResponse<Array<Arrival>>>;
-    getNetworks(): Promise<AxiosResponse<Array<Network>>>;
+    getNetworks(stationId: string): Promise<AxiosResponse<Array<Network>>>;
 }
