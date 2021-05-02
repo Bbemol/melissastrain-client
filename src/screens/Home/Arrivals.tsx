@@ -5,6 +5,7 @@ import { useArrivals } from "hooks";
 
 export const Arrivals = () => {
     const { isSuccess, isError, data, error } = useArrivals("stop_area:SNCF:87384008");
+    const responseError = error as any;
     return (
         <>
             {!isSuccess ? (
@@ -12,7 +13,7 @@ export const Arrivals = () => {
                     {isError ? (
                         <Alert status="error" maxWidth="400">
                             <AlertIcon />
-                            {error?.toString()}
+                            {responseError?.toString()}
                         </Alert>
                     ) : (
                         <Alert status="warning" maxWidth="400">
